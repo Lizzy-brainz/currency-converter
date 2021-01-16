@@ -57,7 +57,7 @@ exchangeBtn.addEventListener("click", () => {
     }
     if (response){
         
-        message.innerHTML = `Warning: ${response}`;
+        message.innerHTML = `Warning!: ${response}`;
     } else {
         message.innerHTML = "";
     }
