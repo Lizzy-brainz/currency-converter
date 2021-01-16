@@ -101,4 +101,5 @@ function changeExchangeRate() {
   const exchangeRate = rates[selectedCurrency];
   exchangeRateInput.value = exchangeRate;
   newCurrencyUnit.value = selectedCurrency;
+  
 }
