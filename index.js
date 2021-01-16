@@ -55,11 +55,10 @@ exchangeBtn.addEventListener("click", () => {
     } else {
       response = "Input a number digit";
     }
-    if (response){
-        
-        message.innerHTML = `Warning!: ${response}`;
+    if (response) {
+      message.innerHTML = `Warning!: ${response}`;
     } else {
-        message.innerHTML = "";
+      message.innerHTML = "";
     }
   } catch (err) {
     console.log(err);
