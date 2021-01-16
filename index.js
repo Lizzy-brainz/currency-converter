@@ -10,36 +10,60 @@ const feedback = document.getElementById("feedback");
 let rates = {};
 let response;
 
-function validateBtn(){
-    try {
-        if (amountInput.value && Number.isInteger(Number(amountInput.value))) {
-            return true; } else { return false;
-        }
-    } catch (error) {
-        console.log(error);
+function validateBtn() {
+  try {
+    if (amountInput.value && Number.isInteger(Number(amountInput.value))) {
+      return true;
+    } else {
+      return false;
     }
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function validateExcahngeRate() {
+  try {
+    if (exchangeRateInput.value) {
+      return true;
+    } else {
+      return false;
+    }
+  } catch (error) {
+    console.log(error);
+  }
 }
 
 exchangeBtn.addEventListener("click", () => {
-    try {
-        if (validateBtn()) {
-            let selectedCurrency = currencyDropdown.value;
-            let exchangeRate     = rates[selectedCurrency];
-            let amount           = parseInt(amountInput.value);
-            let newAmount        = exchangeRate * amount;
+  try {
+    if (validateBtn()) {
+      if (validateExcahngeRate()) {
+        response = null;
+        let selectedCurrency = currencyDropdown.value;
+        let exchangeRate = rates[selectedCurrency];
+        let amount = parseInt(amountInput.value);
+        let newAmount = exchangeRate * amount;
 
-            feedback.innerHTML = `Your <span class="amount">${amount} Dollar${
-                amount > 1 ? "s" : ""
-            }💰</span> will buy you <span class="amount">${newAmount} ${selectedCurrency}${
-                newAmount > 1 ? "s" : ""
-            }</span>`;
-        } else {
-            response = 'Input a number digit';
-            if (response) message.innerHTML += `Error: ${response}`;
-        };
-    } catch (err) {
-        console.log(err);
+        feedback.innerHTML = `Your <span class="amount">${amount} Dollar${
+          amount > 1 ? "s" : ""
+        }💰</span> will buy you <span class="amount">${newAmount} ${selectedCurrency}${
+          newAmount > 1 ? "s" : ""
+        }</span>`;
+      } else {
+        response = "Pick a currency";
+      }
+    } else {
+      response = "Input a number digit";
     }
+    if (response){
+        
+        message.innerHTML = `Warning: ${response}`;
+    } else {
+        message.innerHTML = "";
+    }
+  } catch (err) {
+    console.log(err);
+  }
 });
 
 fetch(
@@ -63,11 +87,12 @@ fetch(
   const originalCurrency = "Dollar💰";
   originalCurrencyInput.value = `${originalCurrency}`;
   amountInput.addEventListener("input", function () {
-      console.log(this.value)
+    console.log(this.value);
     if (oldVal !== this.value) {
       oldVal = this.value;
       const amount = parseInt(amountInput.value);
-      originalCurrencyInput.value = `Dollar${amount > 1 ? "s" : ""}`+ "" +"💰";
+      originalCurrencyInput.value =
+        `Dollar${amount > 1 ? "s" : ""}` + "" + "💰";
     }
   });
 })();
