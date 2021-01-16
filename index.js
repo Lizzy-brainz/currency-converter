@@ -47,7 +47,7 @@ exchangeBtn.addEventListener("click", () => {
         feedback.innerHTML = `Your <span class="amount">${amount} Dollar${
           amount > 1 ? "s" : ""
         }💰</span> will buy you <span class="amount">${newAmount} ${selectedCurrency}${
-          newAmount > 1 ? "s" : ""
+          newAmount > 1 ? "'s" : ""
         }</span>`;
       } else {
         response = "Pick a currency";
@@ -74,8 +74,6 @@ fetch(
       currencyDropdown.innerHTML += `<option value=${rate}>${rate}</option>`;
     }
     rates = data.rates;
-    console.log(rates);
-    console.log(data);
   })
   .catch((err) => {
     console.log(err);
@@ -101,5 +99,5 @@ function changeExchangeRate() {
   const exchangeRate = rates[selectedCurrency];
   exchangeRateInput.value = exchangeRate;
   newCurrencyUnit.value = selectedCurrency;
-  
+
 }
